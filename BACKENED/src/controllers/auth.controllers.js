@@ -89,10 +89,16 @@ const login = async(req,res)=>{
 
 const logout = async(req,res)=>{
     try {
-        res.cookie("jwt","",{maxAge})
+        res.cookie("jwt","",{maxAge:0})
+        res.status(200).json({message:"Logged out successfully"});
     } catch (error) {
-        
+        console.log("error in logout controller",error.message);
+        res.status(500).json({message:"Internal server error"});
     }
 }
 
-export {signup,login,logout};
+const updateprofile = async(req,res)=>{
+
+}
+
+export {signup,login,logout,updateprofile};
