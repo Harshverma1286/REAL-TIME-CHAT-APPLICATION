@@ -1,3 +1,4 @@
+import cloudinary from '../db/cloudinary.js';
 import { generatetoken } from '../db/utils.js';
 import usermodel from '../models/user.models.js'
 
@@ -98,7 +99,35 @@ const logout = async(req,res)=>{
 }
 
 const updateprofile = async(req,res)=>{
+    try {
+        const {profilepic} = req.body;
+        
+        const userid = req.user._id;
 
+        if(!profilepic){
+            return res.status(400).json({message:"profile pic is required"});
+        }
+
+        const uploadresponse = await cloudinary.uploader.upload(profilepic);
+
+        const updateduser = await user.findByIdAndUpdte(userid,{profilepic:uploadresponse.secure_url},{new:true});
+
+        res.status(200).json(updateduser);
+
+
+    } catch (error) {
+        console.log("error in updateprofile controller",error.message);
+        res.status(500).json({message:"Internal server error"});
+    }
 }
 
-export {signup,login,logout,updateprofile};
+const authcheck = async(req,res)=>{
+    try {
+        res.status(200).json(req.user);
+    } catch (error) {
+        console.log("error in authcheck controller",error.message);
+        res.status(500).json({message:"Internal server error"});
+    }
+}
+
+export {signup,login,logout,updateprofile,authcheck};

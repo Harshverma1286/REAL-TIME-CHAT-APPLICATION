@@ -1,5 +1,5 @@
 import express from 'express';
-import { login, logout, signup,updateprofile } from '../controllers/auth.controllers';
+import { authcheck, login, logout, signup,updateprofile } from '../controllers/auth.controllers';
 const authrouter = express.Router();
 
 import {protectroute} from '../middlewares/auth.middleware.js'
@@ -10,7 +10,9 @@ authrouter.post('login',login);
 
 authrouter.post('logout',logout);
 
-authrouter.put("/update-profile",protectroute,updateprofile)
+authrouter.put("/update-profile",protectroute,updateprofile);
+
+authrouter.get("/check",protectroute,authcheck);
 
 
 export default authrouter;
