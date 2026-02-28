@@ -10,13 +10,24 @@ import { formatMessageTime } from '../lib/utils';
 
 function Chatcontainer() {
 
-  const {messages,getmessages,ismessagesloading,selecteduser} = usechatstore();
+  const {messages,getmessages,ismessagesloading,selecteduser,subscribetomessage,unsubscribetomessages} = usechatstore();
 
   const {authuser} = useAuthStore();
 
+  const messageendref = useref(null);
+
   useEffect(()=>{
     getmessages(selecteduser._id)
-  },[selecteduser._id,getmessages]);
+    subscribetomessage()
+
+    return ()=> unsubscribetomessages();
+  },[selecteduser._id,getmessages,subscribetomessage,unsubscribetomessages]);
+
+  useEffect(()=>{
+    if(messageendref.current && messages){
+      messageendref.current.scrollIntoView({behavior:"smooth"})
+    }
+  },[messages])
 
   if(ismessagesloading) return (
     <div className='flex-1 flex flex-col overflow-auto'>
@@ -34,6 +45,7 @@ function Chatcontainer() {
           <div
           key={message._id}
           className={`chat ${message.senderid ===authuser._id ? "chat-end" : "chat-start"}`}
+          ref={messageendref}
           >
 
             <div className='chat-image avatar'>

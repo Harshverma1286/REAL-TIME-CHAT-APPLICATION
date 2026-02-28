@@ -16,7 +16,7 @@ import {
 
 function App() {
 
-  const {authUser,checkauth,isCheckingAuth} = useAuthStore();
+  const {authUser,checkauth,isCheckingAuth,onlineusers} = useAuthStore();
   const {theme,setTheme} = useThemestore();
 
   useEffect(()=>{

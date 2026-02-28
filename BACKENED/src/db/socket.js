@@ -14,14 +14,27 @@ const io = new Server(server,{
     }
 })
 
+export function getreciversocketid(userid){
+    return usersocketmap[userid];
+}; 
+
+const usersocketmap = {};
+
 
 
 io.on("connection",(socket)=>{
     console.log("a user connected",socket.id);
 
+    const userid = socket.handshake.query.userid;
+
+    if(userid) usersocketmap[userid] = socket.id;
+
+    io.emit("getonlineusers",Object.keys(usersocketmap));
 
     socket.on("disconnect",()=>{
         console.log("a user disconnected",socket.id);
+        delete usersocketmap[userid];
+        io.emit("getonlineusers",Object.keys(usersocketmap));
     })
 })
 
