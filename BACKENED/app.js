@@ -11,7 +11,7 @@ import authroutes from './src/routes/auth.routes.js';
 import messageroutes from './src/routes/Message.routes.js';
 
 
-app.use(express.json({limit:"16kb"}));
+app.use(express.json());
 
 app.use(express.urlencoded({extended:true}));
 

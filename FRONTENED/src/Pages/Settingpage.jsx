@@ -1,6 +1,6 @@
 import React from 'react';
 import {THEMES} from '../constants/index.js';
-import { useThemestore } from './store/useauthstore.js';
+import { useThemestore } from '../store/useThemestore.js'
 import { Send } from 'lucide-react';
 const previewmessages = [
   {id:1,content:"Hey ! How's it going ?", insent:false},

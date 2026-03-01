@@ -26,7 +26,7 @@ const signup = async(req,res)=>{
         const hashedpassword = await bcrypt.hash(password,salt);
 
 
-        const newuser = new user({
+        const newuser = new usermodel({
             fullname,
             email,
             password:hashedpassword
@@ -110,7 +110,7 @@ const updateprofile = async(req,res)=>{
 
         const uploadresponse = await cloudinary.uploader.upload(profilepic);
 
-        const updateduser = await user.findByIdAndUpdte(userid,{profilepic:uploadresponse.secure_url},{new:true});
+        const updateduser = await usermodel.findByIdAndUpdate(userid,{profilepic:uploadresponse.secure_url},{new:true});
 
         res.status(200).json(updateduser);
 

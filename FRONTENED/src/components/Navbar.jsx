@@ -1,5 +1,7 @@
 import { LogOut, MessageSquare, Settings,User } from 'lucide-react';
 import React from 'react'
+import { useAuthStore } from '../store/useauthstore.js';
+import {Link} from 'react-router-dom'
 
 function Navbar() {
 

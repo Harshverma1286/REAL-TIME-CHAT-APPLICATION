@@ -10,7 +10,7 @@ export const protectroute = async(req,res,next)=>{
             return res.status(401).json({message:"unauthorized - No token provided"});
         }
 
-        const decoded_id = jwt.verify(token,process.env.JWT_SECRET);
+        const decoded_id = jwt.verify(token,process.env.JWT_SECRET_KEY);
 
         if(!decoded_id){
             return res.status(401).json({message:"unauthorized - Invalid token"});
@@ -26,7 +26,7 @@ export const protectroute = async(req,res,next)=>{
 
         next();
     } catch (error) {
-        console.log("Error in protextroute middleware:",error.message);
+        console.log("Error in protectroute middleware:",error.message);
         res.status(500).json({message:"Internal server error"});
     }
 }

@@ -6,9 +6,9 @@ import {protectroute} from '../middlewares/auth.middleware.js'
 
 authrouter.post('/signup',signup);
 
-authrouter.post('login',login);
+authrouter.post('/login',login);
 
-authrouter.post('logout',logout);
+authrouter.post('/logout',logout);
 
 authrouter.put("/update-profile",protectroute,updateprofile);
 
