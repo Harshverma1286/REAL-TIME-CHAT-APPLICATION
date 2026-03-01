@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import {Loader} from 'lucide-react';
 import {Toaster} from 'react-hot-toast';
 import { useAuthStore } from './store/useauthstore.js';
-import { useThemestore } from './store/useauthstore.js';
+import { useThemestore } from './store/useThemestore.js';
 
 import {
     Homepage,

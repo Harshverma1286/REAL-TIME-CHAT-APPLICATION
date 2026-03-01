@@ -6,9 +6,9 @@ import cors from 'cors';
 
 const app = express();
 
-import authroutes from './src/routes/auth.routes';
+import authroutes from './src/routes/auth.routes.js';
 
-import messageroutes from './src/routes/Message.routes';
+import messageroutes from './src/routes/Message.routes.js';
 
 
 app.use(express.json({limit:"16kb"}));
