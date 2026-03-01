@@ -6,6 +6,10 @@ import cors from 'cors';
 
 const app = express();
 
+import authroutes from './src/routes/auth.routes';
+
+import messageroutes from './src/routes/Message.routes';
+
 
 app.use(express.json({limit:"16kb"}));
 
@@ -20,8 +24,12 @@ app.use(cors({
     credentials:true,
 }));
 
+app.get("/", (req, res) => {
+  res.send("Backend is running successfully 🚀");
+});
 
+app.use("/api/v1/auth",authroutes);
 
-
+app.use('/api/v1/message',messageroutes);
 
 export default app;
