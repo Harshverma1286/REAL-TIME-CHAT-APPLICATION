@@ -7,7 +7,7 @@ const messagerouter = express.Router();
 
 messagerouter.get("/user",protectroute,getuser);
 
-messagerouter.get("/:id",protectroute,getmessages);
+messagerouter.get("/getmessage/:id",protectroute,getmessages);
 
 messagerouter.post("/message/:id",protectroute,sendmessage);
 
