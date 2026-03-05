@@ -34,11 +34,11 @@ function App() {
       <Navbar/>
 
       <Routes>
-        <Route path="/" element={checkauth ? <Homepage/> : <Navigate to='/login'/> }/>
+        <Route path="/" element={authUser ? <Homepage/> : <Navigate to='/login'/> }/>
         <Route path="/signup" element={!authUser ?<Signuppage/> : <Navigate to='/'/>}/>
         <Route path="/login" element={!authUser ?<Loginpage/>: <Navigate to='/'/>}/>
-        <Route path="/setting" element={<Settingpage/>}/>
-        <Route path="/profile" element={checkauth ?<Profilepage/> : <Navigate to='/login'/>}/>
+        <Route path="/settings" element={<Settingpage/>}/>
+        <Route path="/profile" element={authUser ?<Profilepage/> : <Navigate to='/login'/>}/>
       </Routes>
 
       <Toaster/>

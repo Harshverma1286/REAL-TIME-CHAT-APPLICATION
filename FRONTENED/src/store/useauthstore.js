@@ -5,7 +5,7 @@ import {io} from 'socket.io-client'
 
 const BASE_URL = "http://localhost:5001";
 
-export const useAuthStore = create((set)=>({
+export const useAuthStore = create((set,get)=>({
     authuser:null,
 
     isCheckingAuth:true,
@@ -20,6 +20,7 @@ export const useAuthStore = create((set)=>({
 
     checkauth: async()=>{
         try {
+            console.log("in auth block");
             const res = await axiosInstance.get("/auth/check");
 
             set({authuser:res.data});
@@ -34,7 +35,7 @@ export const useAuthStore = create((set)=>({
         }
     },
 
-    signup: async()=>{
+    signup: async(data)=>{
         set({isSigningUp:true});
         try {
             const res = await axiosInstance.post("/auth/signup",data);
@@ -100,7 +101,7 @@ export const useAuthStore = create((set)=>({
    
     connectsocket:()=>{
         const {authuser} = get();
-        if(!authuser && get().socket.connected)return;
+        if(!authuser || get().socket.connected)return;
         const socket = io(BASE_URL,{
             query:{
                 userid:authuser._id,

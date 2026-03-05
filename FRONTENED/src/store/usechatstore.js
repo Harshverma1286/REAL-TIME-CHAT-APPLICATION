@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Socket } from 'socket.io-client';
 import { useAuthStore } from './useauthstore';
 
-export const usechatstore = create((set)=>({
+export const usechatstore = create((set,get)=>({
     messages:[],
     users:[],
     selecteduser:null,
@@ -15,7 +15,7 @@ export const usechatstore = create((set)=>({
     getusers:async()=>{
         set({isusersloading:true});
         try {
-            const res = await axiosInstance.get("/users");
+            const res = await axiosInstance.get("/message/users");
             set({users:res.data});
         } catch (error) {
             toast.error(error.response.data.messages);

@@ -34,6 +34,8 @@ const signup = async(req,res)=>{
 
         if(newuser){
             generatetoken(newuser._id,res);
+
+            console.log("token cookie sent")
             await newuser.save();
 
             res.status(201).json({

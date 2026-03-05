@@ -1,14 +1,22 @@
 import express from 'express';
 
+const app = express();
+
 import cookieParser from 'cookie-parser';
 
 import cors from 'cors';
 
-const app = express();
+
+
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
 import authroutes from './src/routes/auth.routes.js';
 
 import messageroutes from './src/routes/Message.routes.js';
+
 
 
 app.use(express.json());
@@ -18,11 +26,6 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static("public"));
 
 app.use(cookieParser());
-
-app.use(cors({
-    origin:"http://localhost:5173",
-    credentials:true,
-}));
 
 app.get("/", (req, res) => {
   res.send("Backend is running successfully 🚀");
