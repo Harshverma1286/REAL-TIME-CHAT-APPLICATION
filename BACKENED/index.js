@@ -1,24 +1,18 @@
-import 'dotenv/config';
+import 'dotenv/config'
 
-import app from './app.js';
+import { server } from './src/db/socket.js'
+import app from './app.js'
 
+import connectdb from './src/db/db.js'
 
+connectdb().then(() => {
 
-import connectdb from './src/db/db.js';
+    server.on("request", app)
 
-connectdb().then(
-()=>{
-    app.on('error',(error)=>{
-        console.log("err",error);
-        throw error;
-    });
-
-    app.listen(process.env.PORT || 3000,function(){
-        console.log(`THE APP IS SUCCESSFULLY WORKING ON PORT ${process.env.PORT}`)
+    server.listen(process.env.PORT || 5001, () => {
+        console.log(`Server running on port ${process.env.PORT || 5001}`)
     })
-}
-).catch(
-    (err)=>{
-        console.log("err",err);
-    }
-)
+
+}).catch((err) => {
+    console.log("DB connection error:", err)
+})

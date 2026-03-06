@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { useAuthStore } from '../store/useauthstore';
 import { Eye, EyeOff, Loader, Loader2, Lock, Mail, MessageSquare } from 'lucide-react';
 import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Loginpage() {
 
   const [showpassword,setshowpassword] = useState(false);
+
+  const navigate = useNavigate();
 
   const [formdata,setformdata] = useState({
     email:"",
@@ -18,7 +21,9 @@ function Loginpage() {
   const handlesubmit = async(e)=>{
     e.preventDefault();
 
-    login(formdata);
+    const success = await login(formdata);
+
+    if(success) navigate('/');
   }
   return (
     <div className='h-screen grid lg:grid-cols-2'> 
