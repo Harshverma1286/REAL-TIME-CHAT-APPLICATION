@@ -82,12 +82,10 @@ export const useAuthStore = create((set,get)=>({
             
 
             get().connectsocket();
-            return true;
         } catch (error) {
              toast.error(
     error.response?.data?.message || error.message || "Login failed"
   );
-            return false;
         } finally{
             set({isLoggingIng:false});
         }
