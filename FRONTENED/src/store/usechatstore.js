@@ -30,7 +30,7 @@ export const usechatstore = create((set,get)=>({
             const res = await axiosInstance.get(`/messages/${userid}`);
             set({messages:res.data});
         } catch (error) {
-            
+            toast.error(error.response.data.message);
         }finally{
             set({ismessagesloading:false});
         }

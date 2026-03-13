@@ -17,7 +17,7 @@ import {
 function App() {
 
   const {authUser,checkauth,isCheckingAuth,onlineusers} = useAuthStore();
-  const {theme,setTheme} = useThemestore();
+  const {theme} = useThemestore();
 
   useEffect(()=>{
     checkauth();
@@ -35,10 +35,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={authUser ? <Homepage/> : <Navigate to='/login'/> }/>
-        <Route path="/signup" element={!authUser ?<Signuppage/> : <Navigate to='/'/>}/>
-        <Route path="/login" element={!authUser ?<Loginpage/>: <Navigate to='/'/>}/>
+        <Route path="/signup" element={!authUser ? <Signuppage/> : <Navigate to='/' />}/>
+        <Route path="/login" element={!authUser ? <Loginpage/> : <Navigate to='/' />}/>
         <Route path="/settings" element={<Settingpage/>}/>
-        <Route path="/profile" element={authUser ?<Profilepage/> : <Navigate to='/login'/>}/>
+        <Route path="/profile" element={authUser ? <Profilepage/> : <Navigate to='/login'/>}/>
       </Routes>
 
       <Toaster/>

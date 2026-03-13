@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import { useAuthStore } from '../store/useauthstore';
-import { Eye, EyeOff, Loader, Loader2, Lock, Mail, MessageSquare } from 'lucide-react';
+import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from 'lucide-react';
 import {Link} from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import Authimagepattern from '../components/Authimagepattern';
 
 function Loginpage() {
 
   const [showpassword,setshowpassword] = useState(false);
-
-  const navigate = useNavigate();
 
   const [formdata,setformdata] = useState({
     email:"",
@@ -21,9 +19,7 @@ function Loginpage() {
   const handlesubmit = async(e)=>{
     e.preventDefault();
 
-    const success = await login(formdata);
-
-    if(success) navigate('/');
+    login(formdata);
   }
   return (
     <div className='h-screen grid lg:grid-cols-2'> 
@@ -33,7 +29,7 @@ function Loginpage() {
           {/* logo */}
           <div className='text-center mb-8'>
             <div className='flex flex-col items-center gap-2 group'>
-              <div className='w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center'>
+              <div className='w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors'>
               <MessageSquare className='w-6 h-6 text-primary'/>
               </div>
               <h1 className='text-2xl font-bold mt-2'>Welcome Back</h1>
@@ -111,6 +107,11 @@ function Loginpage() {
           </div>
         </div>
       </div>
+
+      <Authimagepattern
+      title={"welcome back!"}
+      subtitle={"sign in to continue your conversation and catch up with your messages !"}
+      />
     </div>
   )
 }
