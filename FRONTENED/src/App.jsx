@@ -16,14 +16,14 @@ import {
 
 function App() {
 
-  const {authUser,checkauth,isCheckingAuth,onlineusers} = useAuthStore();
+  const {authuser,checkauth,isCheckingAuth,onlineusers} = useAuthStore();
   const {theme} = useThemestore();
 
   useEffect(()=>{
     checkauth();
   },[checkauth]);
 
-  if(isCheckingAuth && !authUser) return(
+  if(isCheckingAuth && !authuser) return(
     <div className='flex items-center justify-center h-screen'>
       <Loader className="size-10 animate-spin"/>
     </div>
@@ -34,11 +34,11 @@ function App() {
       <Navbar/>
 
       <Routes>
-        <Route path="/" element={authUser ? <Homepage/> : <Navigate to='/login'/> }/>
-        <Route path="/signup" element={!authUser ? <Signuppage/> : <Navigate to='/' />}/>
-        <Route path="/login" element={!authUser ? <Loginpage/> : <Navigate to='/' />}/>
+        <Route path="/" element={authuser ? <Homepage/> : <Navigate to='/login'/> }/>
+        <Route path="/signup" element={!authuser ? <Signuppage/> : <Navigate to='/' />}/>
+        <Route path="/login" element={!authuser ? <Loginpage/> : <Navigate to='/' />}/>
         <Route path="/settings" element={<Settingpage/>}/>
-        <Route path="/profile" element={authUser ? <Profilepage/> : <Navigate to='/login'/>}/>
+        <Route path="/profile" element={authuser ? <Profilepage/> : <Navigate to='/login'/>}/>
       </Routes>
 
       <Toaster/>
