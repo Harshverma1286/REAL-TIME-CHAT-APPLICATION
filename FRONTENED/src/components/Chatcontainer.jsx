@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect ,useRef} from 'react'
 import { usechatstore } from '../store/usechatstore'
 
 import Chatheader from './Chatheader';
@@ -14,7 +14,7 @@ function Chatcontainer() {
 
   const {authuser} = useAuthStore();
 
-  const messageendref = useref(null);
+  const messageendref = useRef(null);
 
   useEffect(()=>{
     getmessages(selecteduser._id)

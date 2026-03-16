@@ -5,7 +5,7 @@ import { getuser ,getmessages, sendmessage} from '../controllers/message.control
 const messagerouter = express.Router();
 
 
-messagerouter.get("/user",protectroute,getuser);
+messagerouter.get("/users",protectroute,getuser);
 
 messagerouter.get("/getmessage/:id",protectroute,getmessages);
 
